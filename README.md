@@ -31,3 +31,8 @@ if err != nil {
 
 printf = "fmt.Printf(\"$1\")"
 ```
+
+### Global snippets
+Global snippets are support via the `global.toml` file. That is,
+create a file called `global.toml` and these snippets will be available no matter
+the filetype.
