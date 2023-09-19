@@ -1,6 +1,10 @@
 package snippet
 
-import "github.com/BurntSushi/toml"
+import (
+	"strings"
+
+	"github.com/BurntSushi/toml"
+)
 
 type snippetObject struct {
 	Trigger string
@@ -17,7 +21,7 @@ func parseTOML(bs []byte) ([]Snippet, error) {
 	for key, val := range content {
 		snippets = append(snippets, Snippet{
 			trigger: key,
-			snippet: val,
+			snippet: strings.TrimSpace(val),
 		})
 	}
 

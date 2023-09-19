@@ -16,6 +16,11 @@ func Load(l *log.Logger, configdir string, m *SnippetManager) error {
 	configFileName := "config.toml"
 
 	filepath.WalkDir(configdir, func(fullpath string, d fs.DirEntry, err error) error {
+		if err != nil {
+			l.Printf("Unexpected error: %s", err)
+			return err
+		}
+
 		if d.IsDir() {
 			return nil
 		}

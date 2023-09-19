@@ -18,6 +18,9 @@ func main() {
 
 	m := snippet.NewSnippetManager(logger)
 	err = snippet.Load(logger, configDir, m)
+	if err != nil {
+		log.Fatalf("failed to load snippets: %s", err)
+	}
 
 	server := internal.NewServer(logger, m)
 	server.Start()
