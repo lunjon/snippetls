@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-// TODO: support files without extension
 type SnippetManager struct {
 	logger   *log.Logger
 	globals  []Snippet
@@ -22,7 +21,7 @@ func NewSnippetManager(l *log.Logger) *SnippetManager {
 }
 
 func (m *SnippetManager) AddGlobalSnippets(content []byte) error {
-	sn, err := parseTOML(content)
+	sn, err := parseKDL(content)
 	if err != nil {
 		return err
 	}
@@ -32,7 +31,7 @@ func (m *SnippetManager) AddGlobalSnippets(content []byte) error {
 }
 
 func (m *SnippetManager) AddFiletypeSnippets(filetype string, content []byte) error {
-	sn, err := parseTOML(content)
+	sn, err := parseKDL(content)
 	if err != nil {
 		return err
 	}
@@ -67,10 +66,21 @@ func (m *SnippetManager) Search(uri string, prefix string) []Snippet {
 type Snippet struct {
 	trigger string
 	snippet string
+	aliases []string
 }
 
 func (sn Snippet) Matches(prefix string) bool {
-	return strings.HasPrefix(sn.trigger, prefix)
+	if strings.HasPrefix(sn.trigger, prefix) {
+		return true
+	}
+
+	for _, alias := range sn.aliases {
+		if strings.HasPrefix(alias, prefix) {
+			return true
+		}
+	}
+
+	return false
 }
 
 func (sn Snippet) Trigger() string {

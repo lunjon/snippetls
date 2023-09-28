@@ -6,3 +6,6 @@ build:
 
 fmt:
 	go fmt ./...
+
+test run=".*":
+	go test ./... -run={{ run }}

@@ -13,26 +13,32 @@ go get github.com/lunjon/snippetls
 
 This language server was only developed in order to inject snippets into an editor with LSP snippet support.
 
-Snippets are loaded per language as a file name `<ext>.toml` put into the `~/.config/snippetls/`.
-So, for instance, to load snippets for the rust programming language you would creates such a file named `rs.toml`.
+Snippets are loaded per language as a file name `<ext>.kdl` put into the `~/.config/snippetls/`.
+So, for instance, to load snippets for the rust programming language you would creates such a file named `rs.kdl`.
 
 ### Snippet definitions
-The snippets are definied in TOML files as they are very simple.
+The snippets are definied in [kdl](https://kdl.dev/) files, as they are very simple.
 
 A snippet is created using with `key = "<snippet>"`, for instance:
 
-```toml
-# go.toml
+```kdl
+# go.kdl
 
-iferr = """
+iferr "
 if err != nil {
     $1 
-}"""
+}"
 
-printf = "fmt.Printf(\"$1\")"
+// The node name is the trigger
+map {
+    // Snippet can be specified using the "snippet" node name
+    snippet "map[string]$1"
+    // Defined one or more aliases for the trigger
+    aliases "m" "mp"
+}
 ```
 
 ### Global snippets
-Global snippets are support via the `global.toml` file. That is,
-create a file called `global.toml` and these snippets will be available no matter
+Global snippets are support via the `global.kdl` file. That is,
+create a file called `global.kdl` and these snippets will be available no matter
 the filetype.

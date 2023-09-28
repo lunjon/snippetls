@@ -11,9 +11,10 @@ import (
 
 // Load snippets from file system and add to the snippet manager.
 // TODO: support "all" snippets that are available no matter file type.
-func Load(l *log.Logger, configdir string, m *SnippetManager) error {
+func Load(l *log.Logger, configdir string) (*SnippetManager, error) {
 	// Reserved for future use
-	configFileName := "config.toml"
+	configFileName := "config.kdl"
+	m := NewSnippetManager(l)
 
 	filepath.WalkDir(configdir, func(fullpath string, d fs.DirEntry, err error) error {
 		if err != nil {
@@ -36,7 +37,7 @@ func Load(l *log.Logger, configdir string, m *SnippetManager) error {
 		}
 
 		filetype, ext := parts[0], parts[1]
-		if ext != "toml" {
+		if ext != "kdl" {
 			return nil
 		}
 
@@ -48,7 +49,7 @@ func Load(l *log.Logger, configdir string, m *SnippetManager) error {
 
 		if filetype == "global" {
 			if err = m.AddGlobalSnippets(bs); err != nil {
-				l.Printf("Error adding snippets for filetype %s: %s", filetype, err)
+				l.Printf("Error adding global snippets: %s", err)
 			}
 		} else {
 			if err = m.AddFiletypeSnippets(filetype, bs); err != nil {
@@ -59,5 +60,5 @@ func Load(l *log.Logger, configdir string, m *SnippetManager) error {
 		return nil
 	})
 
-	return nil
+	return m, nil
 }

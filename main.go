@@ -16,8 +16,7 @@ func main() {
 		log.Fatalf("failed to resolve home folder: %s", err)
 	}
 
-	m := snippet.NewSnippetManager(logger)
-	err = snippet.Load(logger, configDir, m)
+	m, err := snippet.Load(logger, configDir)
 	if err != nil {
 		log.Fatalf("failed to load snippets: %s", err)
 	}
