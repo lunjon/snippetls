@@ -14,10 +14,6 @@ import (
 	"strings"
 )
 
-type sendMessage interface {
-	types.RequestMessage | types.ResponseMessage
-}
-
 type Server struct {
 	logger      *log.Logger
 	cache       *Cache
@@ -85,7 +81,7 @@ func (s *Server) readMessage() (types.RequestMessage, error) {
 	}
 
 	// Skip next line (empty)
-	_, err = s.reader.ReadBytes('\n')
+	_, _ = s.reader.ReadBytes('\n')
 
 	// Read rest of the message
 	buf := make([]byte, contentLength)
