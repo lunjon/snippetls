@@ -19,18 +19,18 @@ So, for instance, to load snippets for the rust programming language you would c
 ### Snippet definitions
 The snippets are defined in [kdl](https://kdl.dev/) files, as they are very simple.
 
-A snippet is created using with `key = "<snippet>"`, for instance:
 
+#### Example
 ```kdl
 # go.kdl
-
-iferr "if err != nil {
-    $1 
-}"
 
 // You can use raw strings in order to define snippets
 // containing " easily:
 log r#"log.Printf("$1")"#
+
+iferr "if err != nil {
+    $1 
+}"
 
 // The node name is the trigger
 map {
