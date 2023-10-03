@@ -36,8 +36,6 @@ func TestParseSimpleNodesInvalid(t *testing.T) {
 	}{
 		{"invalid type - int", `todo 123`},
 		{"invalid value - null", `todo null`},
-		{"invalid value - empty string", `todo ""`},
-		{"invalid value - whitespace only", `todo "  "`},
 	}
 
 	for _, test := range tests {

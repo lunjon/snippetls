@@ -2,6 +2,10 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/lunjon/gokdl v0.1.0 h1:VmoAWUyACkD432Y/kCNcSMpdd8g8vaZo6pfDYzLsVH8=
 github.com/lunjon/gokdl v0.1.0/go.mod h1:4RTQVj99KfuZPVXShI2BOS9EqZQnP72ytHPnIsuiaIg=
+github.com/lunjon/gokdl v0.2.0 h1:ssm9C6HIuhAN5eNpg9v4Sa7WXTsKWIEoRtbU9l8IIUI=
+github.com/lunjon/gokdl v0.2.0/go.mod h1:1Eeu3kFucQ+TZS50AXu386cdfisyV+iuLdH59r+EpfI=
+github.com/lunjon/gokdl v0.3.0 h1:2mPlnGjA4OTc9ApDBmujLzr7xq4XAbugGlFCObHMZ00=
+github.com/lunjon/gokdl v0.3.0/go.mod h1:1Eeu3kFucQ+TZS50AXu386cdfisyV+iuLdH59r+EpfI=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=

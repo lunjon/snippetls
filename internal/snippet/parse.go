@@ -46,12 +46,11 @@ func parseNode(node gokdl.Node) (Snippet, error) {
 		argSnippet = val
 	}
 
-	if len(node.Args) == 0 {
-		// No args given => check children
-		if len(node.Children) == 0 {
-			return errReturn("no snippet body found")
-		}
+	if argSnippet == "" && len(node.Children) == 0 {
+		return errReturn("no snippet body found")
+	}
 
+	if len(node.Children) > 0 {
 		options := map[string]bool{}
 		for _, child := range node.Children {
 			key := child.Name
@@ -59,7 +58,8 @@ func parseNode(node gokdl.Node) (Snippet, error) {
 				return errReturn("duplicate option:", key)
 			}
 
-			if key == "snippet" {
+			switch key {
+			case "snippet":
 				// Check that there's a string arg, else invalid
 				if len(child.Args) != 1 {
 					return errReturn("expected snippet key to have one string argument")
@@ -72,7 +72,8 @@ func parseNode(node gokdl.Node) (Snippet, error) {
 
 				childSnippet = val
 				options[key] = true
-			} else if key == "aliases" {
+			case "aliases":
+				fmt.Println("ALIAS", len(child.Args), len(child.Children))
 				if len(child.Children) > 0 {
 					return errReturn("invalid aliases: expected no children")
 				}
@@ -82,6 +83,7 @@ func parseNode(node gokdl.Node) (Snippet, error) {
 				}
 
 				for _, arg := range child.Args {
+					fmt.Println(arg.Value)
 					val, ok := arg.Value.(string)
 					if !ok {
 						return errReturn("alias must have type string")
@@ -94,7 +96,7 @@ func parseNode(node gokdl.Node) (Snippet, error) {
 
 					aliases = append(aliases, val)
 				}
-			} else {
+			default:
 				return errReturn("unknown option:", key)
 			}
 		}
@@ -106,7 +108,7 @@ func parseNode(node gokdl.Node) (Snippet, error) {
 	var snippet string
 	if argSnippet != "" && childSnippet != "" {
 		return emptySnippet, fmt.Errorf("invalid snippet: %s: must not set snippet in arg and child", node.Name)
-	} else if argSnippet == "" && childSnippet != "" {
+	} else if argSnippet == "" && childSnippet == "" {
 		return emptySnippet, fmt.Errorf("invalid snippet: %s: no snippet body found", node.Name)
 	} else if argSnippet != "" {
 		snippet = argSnippet
