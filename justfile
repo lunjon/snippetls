@@ -1,4 +1,4 @@
-check: build fmt
+check: build fmt test
 
 build:
 	go build main.go
