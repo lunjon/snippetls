@@ -1,6 +1,6 @@
 # SnippetLS
 
-A rudimentary implementation of a language server for the [language server protocol](https://microsoft.github.io/language-server-protocol/) (LSP).
+A rudimentary implementation of a language server for the [language server protocol](https://microsoft.github.io/language-server-protocol/) (LSP) that only provides snippet support.
 
 ## Installation
 
@@ -42,6 +42,7 @@ map {
 ```
 
 ### Global snippets
-Global snippets are support via the `global.kdl` file. That is,
+These are snippets that are included no matter the file type.
+They must be defined in a file called `global.kdl`. That is,
 create a file called `global.kdl` and these snippets will be available no matter
 the file type.
