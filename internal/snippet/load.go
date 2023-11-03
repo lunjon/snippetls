@@ -10,7 +10,6 @@ import (
 )
 
 // Load snippets from file system and add to the snippet manager.
-// TODO: support "all" snippets that are available no matter file type.
 func Load(l *log.Logger, configdir string) (*SnippetManager, error) {
 	// Reserved for future use
 	configFileName := "config.kdl"

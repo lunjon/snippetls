@@ -1,6 +1,6 @@
 # SnippetLS
 
-A rudimentary implementation of a language server for the [language server protocol](https://microsoft.github.io/language-server-protocol/) (LSP) that only provides snippet support.
+A pure Go, although rudimentary, implementation of a language server for the [language server protocol](https://microsoft.github.io/language-server-protocol/) (LSP) that only provides snippet support.
 
 ## Installation
 
