@@ -3,7 +3,7 @@ module github.com/lunjon/snippetls
 go 1.21
 
 require (
-	github.com/lunjon/gokdl v0.3.0
+	github.com/lunjon/gokdl v0.4.0
 	github.com/stretchr/testify v1.8.4
 )
 

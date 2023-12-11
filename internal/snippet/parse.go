@@ -1,6 +1,7 @@
 package snippet
 
 import (
+	"bytes"
 	"fmt"
 	"strings"
 
@@ -10,7 +11,7 @@ import (
 var emptySnippet = Snippet{}
 
 func parseKDL(bs []byte) ([]Snippet, error) {
-	doc, err := gokdl.Parse(bs)
+	doc, err := gokdl.Parse(bytes.NewReader(bs))
 	if err != nil {
 		return nil, err
 	}
