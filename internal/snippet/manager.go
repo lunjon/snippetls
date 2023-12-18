@@ -1,9 +1,13 @@
 package snippet
 
 import (
+	"bytes"
+	"fmt"
 	"log"
 	"path"
 	"strings"
+
+	"github.com/lunjon/gokdl"
 )
 
 type SnippetManager struct {
@@ -18,6 +22,42 @@ func NewSnippetManager(l *log.Logger) *SnippetManager {
 		globals:  []Snippet{},
 		snippets: map[string][]Snippet{},
 	}
+}
+
+func (m *SnippetManager) AddConfig(bs []byte) error {
+	doc, err := gokdl.Parse(bytes.NewReader(bs))
+	if err != nil {
+		return err
+	}
+
+	for _, node := range doc.Nodes() {
+		switch node.Name {
+		case "valid-for", "extends":
+			if len(node.Args) > 0 {
+				return fmt.Errorf("%s takes no arguments", node.Name)
+			}
+			if len(node.Props) > 0 {
+				return fmt.Errorf("%s has no properties", node.Name)
+			}
+
+			for _, child := range node.Children {
+				snips, ok := m.snippets[child.Name]
+				if !ok {
+					continue
+				}
+
+				for _, arg := range child.Args {
+					if v, ok := arg.Value.(string); ok {
+						m.snippets[v] = snips
+					}
+				}
+			}
+		default:
+			return fmt.Errorf("unknown configuration option: %s", node.Name)
+		}
+	}
+
+	return nil
 }
 
 func (m *SnippetManager) AddGlobalSnippets(content []byte) error {

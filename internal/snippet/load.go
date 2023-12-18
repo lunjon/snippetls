@@ -1,6 +1,7 @@
 package snippet
 
 import (
+	"fmt"
 	"io/fs"
 	"log"
 	"os"
@@ -58,6 +59,17 @@ func Load(l *log.Logger, configdir string) (*SnippetManager, error) {
 
 		return nil
 	})
+
+	configFilepath := path.Join(configdir, configFileName)
+	stat, err := os.Stat(configFilepath)
+	if err == nil && !stat.IsDir() {
+		bs, err := os.ReadFile(configFilepath)
+		if err != nil {
+			return m, fmt.Errorf("error reading config file: %s", err)
+		}
+
+		m.AddConfig(bs)
+	}
 
 	return m, nil
 }

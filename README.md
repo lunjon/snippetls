@@ -17,8 +17,7 @@ Snippets are loaded per language as a file name `<ext>.kdl` put into the `~/.con
 So, for instance, to load snippets for the rust programming language you would create such a file named `rs.kdl`.
 
 ### Snippet definitions
-The snippets are defined in [kdl](https://kdl.dev/) files, as they are very simple.
-
+The snippets are defined in [kdl](https://kdl.dev/) files, since they are typically very simple.
 
 #### Example
 ```kdl
@@ -42,7 +41,21 @@ map {
 ```
 
 ### Global snippets
-These are snippets that are included no matter the file type.
-They must be defined in a file called `global.kdl`. That is,
-create a file called `global.kdl` and these snippets will be available no matter
-the file type.
+_Global_ are snippets that are included for all file types.
+They can be defined in a file called `global.kdl`. That is,
+create a file called `global.kdl` and these snippets will be
+available for all file types.
+
+### Configuration
+You can create a file called `config.kdl` (in the same directory as the snippets).
+
+This is used to configure `snippetls`:
+
+```kdl
+// This section can also be called extends
+valid-for {
+    ex "exs"            // Include all snippets in ex.kdl for exs files as well
+    ts "tsx" "js" "jsx" // The ts.kdl snippets are valid for JS and react files
+    md "txt"            // The markdown files are also valid for .txt files
+}
+```
