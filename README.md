@@ -52,10 +52,10 @@ You can create a file called `config.kdl` (in the same directory as the snippets
 This is used to configure `snippetls`:
 
 ```kdl
-// This section can also be called extends
+// This section can also be called "extends"
 valid-for {
     ex "exs"            // Include all snippets in ex.kdl for exs files as well
     ts "tsx" "js" "jsx" // The ts.kdl snippets are valid for JS and react files
-    md "txt"            // The markdown files are also valid for .txt files
+    md "txt"            // The markdown snippets are also valid for .txt files
 }
 ```
