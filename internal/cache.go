@@ -78,6 +78,25 @@ func (d textDocument) getLine(linenum int) (string, bool) {
 	return d.lines[linenum], true
 }
 
+func (d textDocument) getCompletionCandidate(linenum, colnum int) (string, bool) {
+	line, found := d.getLine(linenum)
+	if !found {
+		return "", false
+	}
+	if colnum > len(line) {
+		return "", false
+	}
+	line = line[:colnum]
+	index := strings.LastIndexAny(line, " 	")
+	if index == -1 {
+		return line, true
+	}
+	if index == len(line) - 1 {
+		return "", false
+	}
+	return line[index+1:], true
+}
+
 func stringLines(s string) []string {
 	return strings.Split(s, "\n")
 }
