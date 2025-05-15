@@ -194,14 +194,13 @@ func (s *Server) handleRequest(m types.RequestMessage) error {
 			return nil
 		}
 
-		line, ok := doc.getLine(params.Position.Line)
+		candidate, ok := doc.getCompletionCandidate(params.Position.Line, params.Position.Character)
 		if !ok {
 			s.sendResponse(m.ID, nil)
 			return nil
 		}
 
-		line = strings.TrimSpace(line)
-		snippets := s.snippets.Search(params.TextDocument.URI, line)
+		snippets := s.snippets.Search(params.TextDocument.URI, candidate)
 
 		items := []types.CompletionItem{}
 		for _, sn := range snippets {
